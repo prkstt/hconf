@@ -1,0 +1,186 @@
+{
+    "layer" : "top",
+    "position" : "top",
+    "width" : 1200,
+    "margin" : "5 0",
+    "reload_style_on_change": true,
+    "height": 32,
+
+
+    //Модули панели слева
+    "modules-left": [
+      "custom/launcher",
+      "tray",
+      "hyprland/workspaces",
+      "network",
+      "pulseaudio",
+      "backlight"
+    ],
+
+    //Модули панели по центру
+    "modules-center": [
+    "clock"
+    ],
+
+
+    //Модули панели справа
+    "modules-right": [
+      "cpu",
+      "memory",
+      "temperature",
+      "bluetooth",
+      "battery",
+      "custom/power"
+    ],
+
+
+
+    
+    // Стили для каждого модуля
+    "custom/launcher": {
+        "format": " ",
+        "on-click": "rofi -show drun",
+        "tooltip": false
+    },
+    
+
+    //Рабочие пространства
+  "hyprland/workspaces": { "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1",
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    }
+  },
+
+
+  //Модули панели
+    
+    "tray": {
+        "spacing": 10,
+        "icon-size": 18,
+        "on-right-click": "activate" 
+    },
+    
+    "clock": {
+        "format": "{:%H:%M}",
+        "interval": 60
+    },
+    
+    "cpu": {
+        "format": "󰍛 {usage}%",
+        "interval": 5
+    },
+
+
+    
+    "memory": {
+        "format": "󰍛 {}%",
+        "interval": 5,
+        "on-click": "htop"
+    },
+    
+    "temperature": {
+        "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "format": " {temperatureC}°C",
+        "critical-threshold": 80,
+        "interval": 5
+    },
+
+      "bluetooth": {
+    "format": "󰂰",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "format-connected-battery": "󰂱",
+
+    "tooltip-format": 
+      "{num_connections} connected",
+    "tooltip-format-disabled": 
+      "Bluetooth Disabled",
+    "tooltip-format-connected": 
+      "{device_enumerate}",
+    "tooltip-format-enumerate-connected": 
+      "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": 
+      ":: {device_alias}: 󱊣 {device_battery_percentage}%",
+    "on-click": "blueman-manager",
+    "interval": 1,
+    "min-length": 1,
+    "max-length": 1
+  },
+
+    
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 20
+    },
+
+    "format": "{icon} {capacity}%",
+    "format-icons": ["󰂎", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "tooltip-format": "Discharging: {time}",
+    "tooltip-format-charging": "Charging: {time}",
+    "interval": 1,
+    "min-length": 6,
+    "max-length": 6
+  },
+
+
+
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "tooltip": false,
+    "on-scroll-up": "~/.config/waybar/scripts/brightness-control.sh -o i",
+    "on-scroll-down": "~/.config/waybar/scripts/brightness-control.sh -o d",
+    "min-length": 6,
+    "max-length": 6
+  },
+
+    
+
+      "network": {
+    "on-click": "kitty --title '󰤨  Network Manager TUI' bash -c nmtui",
+    "format": "{ifname}",
+    "format-wifi": "   {signalStrength}%",
+    "format-ethernet": "󰊗  {ipaddr}/{cidr}",
+    "format-disconnected": "󰖪 0%", 
+    "tooltip-format": "{essid} {ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected"
+  },
+    
+
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon}󰂰 {volume}%",
+        "format-muted": "󰝟 Muted",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "phone": "󰂓",
+            "portable": "󰂓",
+            "car": "󰄋",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol",
+        "scroll-step": 5
+    },
+    
+
+
+    "custom/power": {
+        "format": "󰐥",
+        "on-click": "/home/x/.config/rofi/powermenu/type-2/powermenu.sh",
+        "tooltip": false
+    }
+}
