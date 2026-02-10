@@ -1,1 +1,1 @@
-# hconf
+# 1HyprlandConf
